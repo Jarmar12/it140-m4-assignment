@@ -1,29 +1,60 @@
-# IT 140 Module Four Assignment
-# Higher/Lower Game Pseudocode Template
-#
-# Complete the TODO prompts below with your own pseudocode.
-# Keep this file in .pseudo format for submission.
-#
-# Use clear indentation to show decisions and repeated behavior.
-# Your finished pseudocode should address every requirement in the
-# current Module Four Assignment Guidelines and Rubric.
-
 START hilow_game
 
     # Establish a valid guessing range.
-    TODO: Obtain the lower and upper bounds.
-    TODO: Repeat as needed until the bounds satisfy the requirement.
+    PROMPT "Enter the lower bound:"
+    SET lower_bound TO USER_INPUT
+
+    PROMPT "Enter the upper bound:"
+    SET upper_bound TO USER_INPUT
+
+    WHILE lower_bound >= upper_bound
+        PRINT "The lower bound must be less than the upper bound."
+        PROMPT "Enter the lower bound:"
+        SET lower_bound TO USER_INPUT
+
+        PROMPT "Enter the upper bound:"
+        SET upper_bound TO USER_INPUT
+    END WHILE
 
     # Establish the number the player is trying to guess.
-    TODO: Generate the required random number from the valid range.
+    GENERATE random_number BETWEEN lower_bound AND upper_bound
 
     # Play the game.
-    TODO: Obtain and validate a guess using the selected bounds.
-    TODO: Repeat the required game behavior until the correct guess.
-        TODO: Compare a valid guess and provide the required feedback.
-        TODO: Obtain and validate another guess when play continues.
+    PROMPT "Great, now guess a number between " + lower_bound + " and " + upper_bound + ":"
+    SET guess TO USER_INPUT
+
+    # Validate the first guess.
+    WHILE guess < lower_bound OR guess > upper_bound
+        PRINT "Your guess must be between the lower and upper bounds."
+        PROMPT "Guess another number:"
+        SET guess TO USER_INPUT
+    END WHILE
+
+    # Repeat the required game behavior until the correct guess.
+    WHILE guess != random_number
+
+        # Compare a valid guess and provide the required feedback.
+        IF guess < random_number THEN
+            PRINT "Nope, too low."
+        ELSE
+            PRINT "Nope, too high."
+        END IF
+
+        # Obtain and validate another guess when play continues.
+        PROMPT "Guess another number:"
+        SET guess TO USER_INPUT
+
+        WHILE guess < lower_bound OR guess > upper_bound
+            PRINT "Your guess must be between the lower and upper bounds."
+            PROMPT "Guess another number:"
+            SET guess TO USER_INPUT
+        END WHILE
+
+    END WHILE
+
+    PRINT "You got it!"
 
 END hilow_game
 
 # === References ===
-# TODO: Add references for sources you used, or delete this line if unused.
+# None used.
